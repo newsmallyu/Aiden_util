@@ -49,7 +49,7 @@ public class LeetcodeTest {
 
     @Test
     /**
-     * 给定一个数组，
+     * 在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
      */
     public boolean findNumberIn2DArray(int[][] matrix, int target) {
         if(matrix ==null|| matrix.length==0|matrix[0].length==0){
@@ -65,4 +65,46 @@ public class LeetcodeTest {
         }
         return result;
     }
+
+    /**
+     * 请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
+     * @param s
+     * @return
+     */
+    @Test
+    public String replaceSpace(String s) {
+        String result = null;
+        if (s!=null&&!s.equals("")){
+            result = s.replaceAll(" ", "%20");
+        }
+        if(s.equals("")){
+            result = "";
+        }
+        return result;
+    }
+    public class ListNode {
+      int val;
+      ListNode next;
+      ListNode(int x) { val = x; }
+  }
+    public int[] reversePrint(ListNode head) {
+        //先获取链表长度，创建对应长度数组
+        ListNode currNode = head;
+        int len = 0;
+        while(currNode != null){
+            len ++;
+            currNode = currNode.next;
+        }
+        int[] result = new int[len];
+
+        //再次遍历链表，将值倒序填充至结果数组
+        currNode = head;
+        while(currNode != null){
+            result[len - 1] = currNode.val;
+            len --;
+            currNode = currNode.next;
+        }
+        return result;
+    }
+
 }
