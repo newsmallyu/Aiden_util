@@ -1,15 +1,9 @@
-<mxfile host="app.diagrams.net" modified="2021-03-10T08:02:32.437Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36" etag="hPMTo0-tv8hDjBGPGcfR" version="14.4.6" type="github">
+<mxfile host="app.diagrams.net" modified="2021-03-10T08:05:45.935Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36" etag="um5HfXwRhsM9jWUgpb3u" version="14.4.6" type="github">
   <diagram name="Page-1" id="3e8102d1-ef87-2e61-34e1-82d9a586fe2e">
-    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="2522" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="70666756c84bb93c-1" value="" style="ellipse;whiteSpace=wrap;html=1;rounded=0;shadow=0;comic=0;strokeWidth=1;fontFamily=Verdana;fontSize=14;strokeColor=none;fillColor=#0069D1;" parent="1" vertex="1">
-          <mxGeometry x="280" y="110" width="500" height="500" as="geometry" />
-        </mxCell>
-        <mxCell id="70666756c84bb93c-2" value="Enterprise&lt;div&gt;Business&lt;/div&gt;&lt;div&gt;Model&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;rounded=0;shadow=0;comic=0;strokeWidth=1;fontFamily=Verdana;fontSize=22;strokeColor=none;fillColor=#ffffff;fontColor=#0069D1;fontStyle=1" parent="1" vertex="1">
-          <mxGeometry x="400" y="230" width="260" height="260" as="geometry" />
-        </mxCell>
         <mxCell id="70666756c84bb93c-5" value="Community" style="shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#ffffff;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.office.users.users;rounded=0;comic=0;fontFamily=Verdana;fontSize=14;fontColor=#FFFFFF;" parent="1" vertex="1">
           <mxGeometry x="350" y="440" width="46" height="50" as="geometry" />
         </mxCell>
@@ -39,6 +33,24 @@
         </mxCell>
         <mxCell id="70666756c84bb93c-15" value="Finance" style="shape=mxgraph.signs.travel.euro;html=1;fillColor=#ffffff;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;rounded=0;shadow=0;dashed=0;comic=0;fontFamily=Verdana;fontSize=14;fontColor=#FFFFFF;" parent="1" vertex="1">
           <mxGeometry x="637" y="189" width="45" height="51" as="geometry" />
+        </mxCell>
+        <mxCell id="DE1TS9_LywOwkPTmytXB-1" value="" style="shape=mxgraph.signs.food.bar;html=1;pointerEvents=1;fillColor=#000000;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="-10" y="189" width="98" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="DE1TS9_LywOwkPTmytXB-2" value="" style="shape=mxgraph.signs.food.food_truck;html=1;pointerEvents=1;fillColor=#000000;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="539" y="263" width="98" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="DE1TS9_LywOwkPTmytXB-3" value="" style="shape=mxgraph.signs.food.restaurant_1;html=1;pointerEvents=1;fillColor=#000000;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="810" y="220" width="35" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="DE1TS9_LywOwkPTmytXB-4" value="" style="shape=mxgraph.signs.food.drinking_water_2;html=1;pointerEvents=1;fillColor=#000000;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="335" y="220" width="76" height="98" as="geometry" />
+        </mxCell>
+        <mxCell id="DE1TS9_LywOwkPTmytXB-5" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="235" as="sourcePoint" />
+            <mxPoint x="320" y="270" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
