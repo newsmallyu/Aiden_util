@@ -1,8 +1,11 @@
 package com.aiden.pk.util;
 
+
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class LeetcodeTest {
@@ -10,7 +13,7 @@ public class LeetcodeTest {
      * 给定一个未排序的整数数组，找出最长连续序列的长度
      * @return
      */
-    @Test
+
     public int longestConsecutive(){
         int[] nums = new int[]{5, 200, 1, 3, 101, 2, 444, 4};
         Set<Integer> num_set = new HashSet<>();
@@ -35,7 +38,7 @@ public class LeetcodeTest {
      * 在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。
      * 2 <= n <= 100000
      */
-    @Test
+
     public int findRepeatNumber(int[] nums) {
         Set<Integer> set = new HashSet<>();
         int result =-1;
@@ -47,7 +50,6 @@ public class LeetcodeTest {
         return result;
     }
 
-    @Test
     /**
      * 在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
      */
@@ -71,7 +73,7 @@ public class LeetcodeTest {
      * @param s
      * @return
      */
-    @Test
+
     public String replaceSpace(String s) {
         String result = null;
         if (s!=null&&!s.equals("")){
@@ -105,6 +107,15 @@ public class LeetcodeTest {
             currNode = currNode.next;
         }
         return result;
+    }
+    @Test
+    public void dailyTemperatures() {
+        int[] T = new int[]{56, 33, 65, 88, 99, 44, 52, 64, 58};
+        int lenth = T.length;
+        int[] ans = new int[lenth];
+        int[] next = new int[101];
+        //Arrays.fill(next, Integer.MAX_VALUE);
+        //System.out.println(ints);
     }
 
 }
