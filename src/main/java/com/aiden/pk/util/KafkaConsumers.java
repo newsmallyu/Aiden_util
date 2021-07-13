@@ -56,6 +56,7 @@ public class KafkaConsumers<K, V>  implements Closeable {
 
     @Override
     public void close() throws IOException {
+
         this.consumer.close();
     }
 
