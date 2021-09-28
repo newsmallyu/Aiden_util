@@ -6,6 +6,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author ay05
@@ -200,5 +203,37 @@ public class FileUtil {
             result = df.format((double) size / 1073741824) + "G";
         }
         return result;
+    }
+
+    static final String regex = "^.*.[mercury|buyabs|neqdc].*:$";
+    static final Pattern pattern = Pattern.compile(regex);
+    public static void main(String[] args) throws IOException {
+        FileWriter fw = new FileWriter("tempResult.txt");
+        FileInputStream inputStream = new FileInputStream("E:\\ideaWorkSpace\\Aiden_util\\logs\\nginx-root.log");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String line = null;
+        String tempHostName = null;
+
+        boolean skipLine = false;
+        while ((line = bufferedReader.readLine()) != null) {
+
+            Matcher matcher = pattern.matcher(line.toLowerCase());
+            if (matcher.matches()) {
+                String replaceLine = line.replace(":", "");
+                tempHostName = replaceLine;
+                skipLine = false;
+                System.out.println(line);
+            } else {
+                if (skipLine) {
+                    continue;
+                }
+                if (line.contains("worker process") || line.contains("master process")) {
+
+                    fw.write(tempHostName +"\r\n");
+                    skipLine = true;
+                }
+            }
+        }
+        fw.close();
     }
 }
