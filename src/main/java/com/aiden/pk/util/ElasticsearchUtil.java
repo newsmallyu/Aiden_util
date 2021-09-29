@@ -1,5 +1,6 @@
 package com.aiden.pk.util;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -15,15 +16,26 @@ import org.elasticsearch.client.sniff.Sniffer;
 import org.springframework.util.StringUtils;
 
 import javax.net.ssl.SSLContext;
+import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
+import java.io.StringReader;
 import java.security.cert.X509Certificate;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class ElasticsearchUtil {
+public class ElasticsearchUtil implements Closeable {
     private static final String HOST_SEPARATOR = ",";
+
+    @Override
+    public void close() throws IOException {
+        restHighLevelClient.close();
+    }
 
     public static class Method {
         private Method() {}
@@ -115,6 +127,7 @@ public class ElasticsearchUtil {
         return performRequest(endpoint, Method.GET, null, null);
     }
 
+
     public String performRequest(String endpoint, String method) throws IOException {
         return performRequest(endpoint, method, null, null);
     }
@@ -126,4 +139,73 @@ public class ElasticsearchUtil {
     public String performRequest(String endpoint, String method, Map<String, String> params) throws IOException {
         return performRequest(endpoint, method, params, null);
     }
+
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+
+        ThreadFactory nameThreadFactory = new ThreadFactoryBuilder().setNameFormat("threadPoolDemo" + "-%d").build();
+
+        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(5, 10, 0L,
+                TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(1024), nameThreadFactory);
+
+        ElasticsearchUtil elasticsearchUtil = new ElasticsearchUtil("172.16.129.105:8200", true);
+        String s = elasticsearchUtil.performRequest("_cat/shards");
+
+        BufferedReader bufReader = new BufferedReader(new StringReader(s));
+        String line=null;
+        // filter host
+        String filterHost = "e11flm26.mercury.corp";
+        String toHost = "e11flm23.mercury.corp";
+        int count = 30;
+        try {
+            while ((line = bufReader.readLine()) != null) {
+                String[] split = line.split("\\s+");
+                if (split.length>=8 && filterHost.equals(split[7]) && count > 0) {
+                    if (split[5].contains("kb")) {
+                        String command = getCommand(split[0], Integer.parseInt(split[1]), split[7], toHost);
+                        System.out.println(command);
+                        threadPool.submit(()->{
+                            try {
+                                Thread.sleep(1000);
+                                elasticsearchUtil.performRequest("_cluster/reroute", Method.POST, command);
+                            } catch (IOException | InterruptedException exception) {
+                                exception.printStackTrace();
+                            }
+                        });
+                        Thread.sleep(1000);
+                        count--;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            while (true) {
+                Thread.sleep(10000);
+                long taskCount = threadPool.getCompletedTaskCount();
+                System.out.println(taskCount);
+                if (taskCount == count) {
+                    elasticsearchUtil.close();
+                    break;
+                }
+            }
+        }
+    }
+
+    public static String getCommand(String index,int shard,String from_node,String to_node){
+        String str = "{\n" +
+                "  \"commands\": [\n" +
+                "    {\n" +
+                "      \"move\": {\n" +
+                "        \"index\": \""+index+"\",\n" +
+                "        \"shard\": "+shard+",\n" +
+                "        \"from_node\": \""+from_node+"\",\n" +
+                "        \"to_node\": \""+to_node+"\"\n" +
+                "      }\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+        return str;
+    }
+
 }

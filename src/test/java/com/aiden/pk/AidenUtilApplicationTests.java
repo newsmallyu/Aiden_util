@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -89,5 +92,19 @@ class AidenUtilApplicationTests {
 		for (int i = 0; i < 6; i++) {
 			threadPool.execute(()-> logger.info(String.valueOf(atomicInteger.getAndIncrement())) );
 		}
+	}
+	@Test
+	void testPramDelivery(){
+		Map map = new HashMap();
+		map.put("key", "123");
+		map.put("key2", "1234");
+		map.put("key3", "12345");
+		subTest(map);
+		System.out.println("2" + map.toString());
+	}
+
+	public void subTest(Map map){
+		map.remove("key");
+		System.out.println("1" + map.toString());
 	}
 }
