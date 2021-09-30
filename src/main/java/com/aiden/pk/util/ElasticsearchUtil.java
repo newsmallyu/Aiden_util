@@ -166,9 +166,8 @@ public class ElasticsearchUtil implements Closeable {
                         System.out.println(command);
                         threadPool.submit(()->{
                             try {
-                                Thread.sleep(1000);
                                 elasticsearchUtil.performRequest("_cluster/reroute", Method.POST, command);
-                            } catch (IOException | InterruptedException exception) {
+                            } catch (IOException  exception) {
                                 exception.printStackTrace();
                             }
                         });
